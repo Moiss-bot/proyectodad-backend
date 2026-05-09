@@ -9,7 +9,7 @@ spring:
         webflux:
           routes:
             - id: ms-accesorios
-              uri: http://localhost:8084
+              uri: lb://ms-accesorios
               predicates:
                 - Path=/api/accesorios/**
             - id: ms-clientes

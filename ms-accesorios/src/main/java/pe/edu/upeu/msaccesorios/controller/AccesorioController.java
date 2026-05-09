@@ -1,6 +1,9 @@
 package pe.edu.upeu.msaccesorios.controller;
 
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +17,11 @@ import java.util.List;
 @RequestMapping("/api/accesorios")
 public class AccesorioController {
 
+    private static final Logger log = LoggerFactory.getLogger(AccesorioController.class);
+
+    @Value("${server.port}")
+    private String puerto;
+
     private final AccesorioService service;
 
     public AccesorioController(AccesorioService service) {
@@ -22,6 +30,7 @@ public class AccesorioController {
 
     @GetMapping
     public ResponseEntity<List<AccesorioResponse>> listar() {
+        log.info(">> Peticion recibida del puerto: {}", puerto);
         return ResponseEntity.ok(service.listar());
     }
 
