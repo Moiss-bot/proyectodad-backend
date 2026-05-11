@@ -29,7 +29,8 @@ server:
     endpoints:
       web:
         exposure:
-          include: "health,info,circuitbreakers" # Exponemos el endpoint del circuito
+
+          include: "*" # Exponemos el endpoint del circuito
     endpoint:
       health:
         show-details: always
