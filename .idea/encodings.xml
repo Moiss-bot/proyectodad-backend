@@ -4,7 +4,13 @@
     <file url="file://$PROJECT_DIR$/api-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/config-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-accesorios/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-categorias/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-categorias/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-clientes/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-clientes/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-estado/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-estado/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-estados/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-herramientas/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-melamine/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-ordenes/src/main/java" charset="UTF-8" />

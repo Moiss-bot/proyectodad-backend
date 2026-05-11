@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface IClienteService {
     ClienteResponse crear(ClienteRequest request) throws Exception;
-
     List<ClienteResponse> listar();
     ClienteResponse buscarPorId(Long id);
     ClienteResponse buscarPorDni(String dni);
