@@ -51,4 +51,10 @@ public class HerramientaController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}/resiliencia-test")
+    public ResponseEntity<String> probarResiliencia(@PathVariable Long id) {
+        String respuesta = herramientaService.obtenerInformacionAdicional(id);
+        return ResponseEntity.ok(respuesta);
+    }
+
 }
