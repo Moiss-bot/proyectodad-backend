@@ -1,6 +1,7 @@
 package pe.edu.upeu.msherramientas.service;
 
 import org.springframework.stereotype.Service;
+import pe.edu.upeu.msherramientas.client.ServicioExternoClient; // Asegúrate de importar tu cliente
 import pe.edu.upeu.msherramientas.dto.HerramientaResponse;
 import pe.edu.upeu.msherramientas.entity.HerramientaEntity;
 import pe.edu.upeu.msherramientas.errors.HerramientaNotFoundException;
@@ -15,10 +16,22 @@ public class HerramientaService {
 
     private final HerramientaRepository herramientaRepository;
     private final HerramientaMapper herramientaMapper;
+    // 1. Agregamos el cliente externo
+    private final ServicioExternoClient servicioExternoClient;
 
-    public HerramientaService(HerramientaRepository herramientaRepository, HerramientaMapper herramientaMapper) {
+    // 2. Actualizamos el constructor para inyectar el nuevo cliente
+    public HerramientaService(HerramientaRepository herramientaRepository,
+                              HerramientaMapper herramientaMapper,
+                              ServicioExternoClient servicioExternoClient) {
         this.herramientaRepository = herramientaRepository;
         this.herramientaMapper = herramientaMapper;
+        this.servicioExternoClient = servicioExternoClient;
+    }
+
+    // 3. Nuevo método que utiliza el Circuit Breaker
+    public String obtenerInformacionAdicional(Long id) {
+        // Esta llamada está protegida por la anotación @CircuitBreaker en el Cliente
+        return servicioExternoClient.obtenerDatosDeOtroMicroservicio(id);
     }
 
     public List<HerramientaResponse> listar(){
@@ -35,7 +48,6 @@ public class HerramientaService {
         if (dto == null) {
             throw new IllegalArgumentException("Los datos de la herramienta no pueden ser nulos");
         }
-
 
         if (herramientaRepository.existsByNombreIgnoreCase(dto.getNombre())) {
             throw new IllegalArgumentException("No se puede crear. Ya existe una herramienta con el nombre: " + dto.getNombre());

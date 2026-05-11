@@ -21,3 +21,28 @@ spring:
 
 server:
   port: 8083
+
+  # ==========================================
+  # CONFIGURACIÓN DE ACTUATOR (Monitoreo)
+  # ==========================================
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*" # Exponemos el endpoint del circuito
+    endpoint:
+      health:
+        show-details: always
+
+  # ==========================================
+  # CONFIGURACIÓN DE RESILIENCE4J
+  # ==========================================
+  resilience4j:
+    circuitbreaker:
+      instances:
+        servicioExternoCB: # Este es el nombre de nuestra configuración
+          registerHealthIndicator: true
+          slidingWindowSize: 10              # Evalúa las últimas 10 peticiones
+          permittedNumberOfCallsInHalfOpenState: 3 # Llamadas de prueba cuando está semi-abierto
+          waitDurationInOpenState: 15s       # Tiempo que espera antes de intentar conectarse de nuevo
+          failureRateThreshold: 50           # Si el 50% falla (5 de 10), el circuito se ABRE
