@@ -21,7 +21,7 @@ spring:
       indent-output: true
 
 server:
-  port: 8083
+  port: 8082
 
 eureka:
   client:
@@ -30,7 +30,7 @@ eureka:
   instance:
     prefer-ip-address: true
 
-# --- CONFIGURACIÓN DE MONITOREO (ACTUATOR) ---
+# --- CONFIGURACIï¿½N DE MONITOREO (ACTUATOR) ---
 management:
   endpoints:
     web:
@@ -43,7 +43,7 @@ management:
     circuitbreakers:
       enabled: true
 
-# --- CONFIGURACIÓN DE RESILIENCIA (RESILIENCE4J) ---
+# --- CONFIGURACIï¿½N DE RESILIENCIA (RESILIENCE4J) ---
 resilience4j:
   circuitbreaker:
     configs:
