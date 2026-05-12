@@ -24,7 +24,10 @@ spring:
               uri: http://localhost:8087
               predicates:
                 - Path=/api/proyectos/**
-
+            - id: auth-service
+              uri: lb://auth-service
+              predicates:
+                - Path=/auth/**
 
 server:
   port: 8080

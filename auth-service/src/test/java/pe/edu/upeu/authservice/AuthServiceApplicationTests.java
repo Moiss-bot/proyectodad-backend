@@ -1,10 +1,10 @@
-package pe.edu.upeu.service_registry;
+package pe.edu.upeu.authservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ServiceRegistryApplicationTests {
+class AuthServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
