@@ -12,22 +12,34 @@ spring:
               uri: lb://ms-accesorios
               predicates:
                 - Path=/api/accesorios/**
+            - id: ms-categorias
+              uri: lb://ms-categorias
+              predicates:
+                - Path=/api/categorias/**
             - id: ms-clientes
-              uri: http://localhost:8085
+              uri: lb://ms-clientes
               predicates:
                 - Path=/api/clientes/**
+            - id: ms-estado
+              uri: lb://ms-estado
+              predicates:
+                - Path=/api/estado/**
             - id: ms-herramientas
-              uri: http://localhost:8083
+              uri: lb://ms-herramientas
               predicates:
                 - Path=/api/herramientas/**
+            - id: ms-melamine
+              uri: lb://ms-melamine
+              predicates:
+                - Path=/api/melamine/**
+            - id: ms-proveedores
+              uri: lb://ms-proveedores
+              predicates:
+                - Path=/api/proveedores/**
             - id: ms-proyectos
-              uri: http://localhost:8087
+              uri: lb://ms-proyectos
               predicates:
                 - Path=/api/proyectos/**
-            - id: auth-service
-              uri: lb://auth-service
-              predicates:
-                - Path=/auth/**
 
 server:
   port: 8080

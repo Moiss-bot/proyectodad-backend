@@ -20,7 +20,7 @@ spring:
       fail-on-null-for-primitives: true
 
 server:
-  port: 8084
+  port: 8085
 
 eureka:
   client:

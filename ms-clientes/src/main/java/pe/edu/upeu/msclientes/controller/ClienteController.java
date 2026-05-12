@@ -46,7 +46,7 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<ClienteResponse> crear(@Valid @RequestBody ClienteRequest request) {
+    public ResponseEntity<ClienteResponse> crear(@Valid @RequestBody ClienteRequest request) throws Exception {
         return new ResponseEntity<>(service.crear(request), HttpStatus.CREATED);
     }
 
