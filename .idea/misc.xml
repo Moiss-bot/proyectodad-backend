@@ -18,6 +18,7 @@
         <option value="$PROJECT_DIR$/ms-categorias/pom.xml" />
         <option value="$PROJECT_DIR$/ms-estado/pom.xml" />
         <option value="$PROJECT_DIR$/ms-estados/pom.xml" />
+        <option value="$PROJECT_DIR$/auth-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
