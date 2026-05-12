@@ -13,7 +13,7 @@
         <module name="ms-herramientas" />
         <module name="service-registry" />
       </profile>
-      <profile name="Annotation profile for ms-proyectos" enabled="true">
+      <profile name="Annotation profile for ms-accesorios" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
