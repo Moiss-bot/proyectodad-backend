@@ -29,12 +29,8 @@ public class AccesorioController {
     }
 
     @GetMapping
-    public ResponseEntity<?> listar() {
-        log.info(">> Peticion recibida del puerto: {}", puerto);
-        return ResponseEntity.ok(java.util.Map.of(
-                "instancia", puerto,
-                "datos", service.listar()
-        ));
+    public ResponseEntity<List<AccesorioResponse>> listar() {
+        return ResponseEntity.ok(service.listar());
     }
 
     @GetMapping("/{id}")

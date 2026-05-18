@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Service
 public class JwTService {
-    private static final String SECRET = "clave-secreta-super-segura-upeu-2024-inventario";
+    private static final String SECRET = "clavesecretasupersegura321upeu2026";
     private static final long EXPIRATION = 1000 * 60 * 30;
 
     private SecretKey getKey() {
@@ -25,7 +25,6 @@ public class JwTService {
                 .signWith(getKey())
                 .compact();
     }
-
     public String extractUsername(String token) {
         return Jwts.parser()
                 .verifyWith(getKey())
@@ -34,7 +33,6 @@ public class JwTService {
                 .getPayload()
                 .getSubject();
     }
-
     public boolean validateToken(String token) {
         try {
             Jwts.parser().verifyWith(getKey()).build().parseSignedClaims(token);
