@@ -52,17 +52,14 @@ public class ClienteService implements  IClienteService {
 
     @Override
     @CircuitBreaker(name = "clientesCB", fallbackMethod = "fallbackMethod")
-    public ClienteResponse crear(ClienteRequest request) throws Exception{
+    public ClienteResponse crear(ClienteRequest request) throws Exception {
         // Validación local (DB)
         repository.findByDni(request.getDni()).ifPresent(c -> {
             throw new IllegalArgumentException("Ya existe un cliente con el DNI: " + request.getDni());
         });
 
-        // 3. LLAMADA AL MANAGER
-        String rptaExterno = clienteManager.validarDniExterno(request.getDni());
-
         ClienteEntity entity = mapper.toEntity(request);
-        entity.setEstado("ACTIVO - " + rptaExterno);
+        entity.setEstado("ACTIVO");
         return mapper.toResponse(repository.save(entity));
     }
 
