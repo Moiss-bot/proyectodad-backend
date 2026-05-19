@@ -20,7 +20,7 @@ spring:
       indent-output: true
 
 server:
-  port: 8085
+  port: 8065
   # Si quieres el context-path como en el ejemplo de clase, descomenta la siguiente línea:
   # servlet:
   #   context-path: /clientes
