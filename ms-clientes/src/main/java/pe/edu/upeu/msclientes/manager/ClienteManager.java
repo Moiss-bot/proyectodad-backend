@@ -2,6 +2,7 @@ package pe.edu.upeu.msclientes.manager;
 
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class ClienteManager implements IClienteManager {
 
