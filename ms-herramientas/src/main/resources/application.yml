@@ -6,10 +6,10 @@ spring:
     import: "optional:configserver:http://localhost:8088"
 
   datasource:
-    url: jdbc:oracle:thin:@//localhost:1522/FREEPDB1
-    driver-class-name: oracle.jdbc.OracleDriver
-    username: system
-    password: oracle123
+    url: jdbc:mysql://localhost:3307/db_herramientas?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: mysql123
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     show-sql: true
@@ -17,10 +17,10 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.OracleDialect
+        dialect: org.hibernate.dialect.MySQLDialect
 
 server:
-  port: 8083
+  port: 8085
 
 eureka:
   client:

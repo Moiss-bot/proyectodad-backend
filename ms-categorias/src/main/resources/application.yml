@@ -4,18 +4,17 @@ spring:
   config:
     import: "optional:configserver:http://localhost:8088"
   datasource:
-    # Usando PostgreSQL en el puerto 5433 (Docker)
-    url: jdbc:postgresql://localhost:5433/db_categorias?createDatabaseIfNotExist=true
-    username: postgres
-    password: oracle123
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:mysql://localhost:3307/db_categorias?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: mysql123
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.MySQLDialect
   jackson:
     serialization:
       indent-output: true
