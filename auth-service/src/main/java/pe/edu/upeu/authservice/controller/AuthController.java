@@ -30,4 +30,16 @@ public class AuthController {
     public ResponseEntity<Boolean> validate(@RequestParam String token) {
         return ResponseEntity.ok(authService.validateToken(token));
     }
+
+    @PostMapping("/login/admin")
+    public ResponseEntity<AuthResponse> loginAdmin(@RequestBody AuthRequest request) {
+        AuthResponse response = authService.loginConRol(request, "ADMIN");
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/login/user")
+    public ResponseEntity<AuthResponse> loginUser(@RequestBody AuthRequest request) {
+        AuthResponse response = authService.loginConRol(request, "USER");
+        return ResponseEntity.ok(response);
+    }
 }
