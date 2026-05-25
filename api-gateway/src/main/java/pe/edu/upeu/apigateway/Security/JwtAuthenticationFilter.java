@@ -24,10 +24,9 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
         if (path.contains("/auth/")) {
             return chain.filter(exchange);
         }
-        
+
         String auth = exchange.getRequest().getHeaders().getFirst("Authorization");
 
-        // Sin token → 401
         if (auth == null || !auth.startsWith("Bearer ")) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
@@ -36,22 +35,33 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
             return exchange.getResponse().writeWith(Mono.just(buffer));
         }
 
-        // Validar token
         try {
             String token = auth.substring(7);
             String rol = extractRol(token);
             String method = exchange.getRequest().getMethod().name();
 
-            // Si es USER y quiere POST, PUT o DELETE → 403
-            if ("USER".equals(rol) && (method.equals("POST") || method.equals("PUT") || method.equals("DELETE"))) {
-                exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
-                exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
-                String body = "{\"error\":\"Acceso denegado\",\"mensaje\":\"No tiene permisos para realizar esta operación. Solo el ADMIN puede ejecutar esta acción.\"}";
-                DataBuffer buffer = exchange.getResponse().bufferFactory().wrap(body.getBytes());
-                return exchange.getResponse().writeWith(Mono.just(buffer));
+            if ("USER".equals(rol)) {
+
+                if (method.equals("POST") || method.equals("PUT") || method.equals("DELETE")) {
+                    return respuestaForbidden(exchange);
+                }
+
+                if (method.equals("GET") && path.matches(".*/\\d+$")) {
+                    return respuestaForbidden(exchange);
+                }
+
+                if (method.equals("GET") && (
+                        path.contains("/buscar") ||
+                                path.contains("/dni/") ||
+                                path.contains("/apellido/") ||
+                                path.contains("/categoria/") ||
+                                path.contains("/nombre/") ||
+                                path.contains("/resiliencia-test"))) {
+                    return respuestaForbidden(exchange);
+                }
             }
 
-            return chain.filter(exchange); // Token válido → pasa
+            return chain.filter(exchange);
 
         } catch (Exception e) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
@@ -60,6 +70,14 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
             DataBuffer buffer = exchange.getResponse().bufferFactory().wrap(body.getBytes());
             return exchange.getResponse().writeWith(Mono.just(buffer));
         }
+    }
+
+    private Mono<Void> respuestaForbidden(ServerWebExchange exchange) {
+        exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
+        exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
+        String body = "{\"error\":\"Acceso denegado\",\"mensaje\":\"No tiene permisos para realizar esta operación. Solo el ADMIN puede ejecutar esta acción.\"}";
+        DataBuffer buffer = exchange.getResponse().bufferFactory().wrap(body.getBytes());
+        return exchange.getResponse().writeWith(Mono.just(buffer));
     }
 
     private String extractRol(String token) {

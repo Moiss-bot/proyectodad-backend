@@ -20,7 +20,6 @@ public class LoginService {
             if (LocalDateTime.now().isBefore(tiempoBloqueo)) {
                 return true;
             } else {
-                // Tiempo expirado, desbloquear
                 bloqueados.remove(username);
                 intentos.remove(username);
             }
