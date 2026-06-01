@@ -5,24 +5,20 @@ public class ClienteResponse {
     private Long id;
     private String nombre;
     private String apellido;
-    private String dni;
     private String correo;
     private String telefono;
     private String direccion;
-    private String estado;
 
     public ClienteResponse() {
     }
 
-    public ClienteResponse(Long id, String nombre, String apellido, String dni, String correo, String telefono, String direccion, String estado) {
+    public ClienteResponse(Long id, String nombre, String apellido, String correo, String telefono, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.dni = dni;
         this.correo = correo;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.estado = estado;
     }
 
     public Long getId() {
@@ -49,14 +45,6 @@ public class ClienteResponse {
         this.apellido = apellido;
     }
 
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
     public String getCorreo() {
         return correo;
     }
@@ -79,13 +67,5 @@ public class ClienteResponse {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 }

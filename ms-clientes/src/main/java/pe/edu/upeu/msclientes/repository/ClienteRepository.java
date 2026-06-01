@@ -7,7 +7,5 @@ import java.util.Optional;
 
 public interface ClienteRepository extends JpaRepository<ClienteEntity, Long> {
     List<ClienteEntity> findByNombreContainingIgnoreCase(String nombre);
-    Optional<ClienteEntity> findByDni(String dni);
-    List<ClienteEntity> findByEstado(String estado);
     List<ClienteEntity> findByApellidoContainingIgnoreCase(String apellido);
 }

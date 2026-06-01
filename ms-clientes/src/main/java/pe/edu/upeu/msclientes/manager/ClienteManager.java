@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 public class ClienteManager implements IClienteManager {
 
     @Override
-    public String validarDniExterno(String dni) throws Exception {
+    public String validarTelefonoExterno(String telefono) throws Exception {
         // Validación externa desactivada
-        return "DNI Validado Correctamente";
+        return "Teléfono Validado Correctamente";
     }
 }

@@ -44,18 +44,11 @@ public class ClienteService implements  IClienteService {
     }
 
     @Override
-    public ClienteResponse buscarPorDni(String dni) {
-        ClienteEntity entity = repository.findByDni(dni)
-                .orElseThrow(() -> new IllegalArgumentException("No existe el cliente con DNI: " + dni));
-        return mapper.toResponse(entity);
-    }
-
-    @Override
     @CircuitBreaker(name = "clientesCB", fallbackMethod = "fallbackMethod")
     public ClienteResponse crear(ClienteRequest request) throws Exception {
         // Validación local (DB)
-        repository.findByDni(request.getDni()).ifPresent(c -> {
-            throw new IllegalArgumentException("Ya existe un cliente con el DNI: " + request.getDni());
+        repository.findByNombreContainingIgnoreCase(request.getNombre()).ifPresent(c -> {
+            throw new IllegalArgumentException("Ya existe un cliente con el DNI: " + request.getNombre());
         });
 
         ClienteEntity entity = mapper.toEntity(request);

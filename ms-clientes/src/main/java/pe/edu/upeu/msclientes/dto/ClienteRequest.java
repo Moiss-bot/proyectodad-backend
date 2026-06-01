@@ -12,10 +12,6 @@ public class ClienteRequest {
     @Size(max = 100, message = "El apellido no debe exceder 100 caracteres")
     private String apellido;
 
-    @NotBlank(message = "El DNI es obligatorio")
-    @Size(min = 8, max = 8, message = "El DNI debe tener 8 caracteres")
-    private String dni;
-
     @NotBlank(message = "El correo es obligatorio")
     @Email(message = "El correo no es válido")
     private String correo;
@@ -27,6 +23,14 @@ public class ClienteRequest {
     private String direccion;
 
     public ClienteRequest() {
+    }
+
+    public ClienteRequest(String nombre, String apellido, String correo, String telefono, String direccion) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.direccion = direccion;
     }
 
     public String getNombre() {
@@ -43,14 +47,6 @@ public class ClienteRequest {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
     }
 
     public String getCorreo() {

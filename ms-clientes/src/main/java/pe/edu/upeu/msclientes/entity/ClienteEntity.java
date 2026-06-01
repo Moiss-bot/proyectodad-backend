@@ -16,9 +16,6 @@ public class ClienteEntity {
     @Column(name = "APELLIDO", length = 100, nullable = false)
     private String apellido;
 
-    @Column(name = "DNI", length = 8, nullable = false, unique = true)
-    private String dni;
-
     @Column(name = "CORREO", length = 100, nullable = false)
     private String correo;
 
@@ -28,21 +25,16 @@ public class ClienteEntity {
     @Column(name = "DIRECCION", length = 255)
     private String direccion;
 
-    @Column(name = "ESTADO", length = 20)
-    private String estado;
-
     public ClienteEntity() {
     }
 
-    public ClienteEntity(Long id, String nombre, String apellido, String dni, String correo, String telefono, String direccion, String estado) {
+    public ClienteEntity(Long id, String nombre, String apellido, String correo, String telefono, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.dni = dni;
         this.correo = correo;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.estado = estado;
     }
 
     public Long getId() {
@@ -69,14 +61,6 @@ public class ClienteEntity {
         this.apellido = apellido;
     }
 
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
     public String getCorreo() {
         return correo;
     }
@@ -101,11 +85,4 @@ public class ClienteEntity {
         this.direccion = direccion;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 }
