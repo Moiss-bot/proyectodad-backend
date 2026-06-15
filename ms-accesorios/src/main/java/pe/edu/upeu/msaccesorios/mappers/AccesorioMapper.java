@@ -56,21 +56,7 @@ public class AccesorioMapper {
     private Map<String, String> validarRangos(AccesorioRequest request) {
         Map<String, String> errores = new LinkedHashMap<>();
 
-        if (request.getNombre() != null && request.getNombre().matches(".*\\d.*")) {
-            errores.put("nombre", "El nombre solo debe contener letras, no números");
-        }
-
-        if (request.getDescripcion() != null && request.getDescripcion().matches(".*\\d.*")) {
-            errores.put("descripcion", "La descripción solo debe contener letras, no números");
-        }
-
-        if (request.getPrecio() != null && !request.getPrecio().matches("^-?\\d+(\\.\\d+)?$")) {
-            errores.put("precio", "El precio debe ser un número decimal o entero");
-        }
-
-        if (request.getStock() != null && !request.getStock().matches("^-?\\d+$")) {
-            errores.put("stock", "El stock debe ser un número entero");
-        }
+        // 🎯 Se eliminó el bloqueo de números en Nombre y Descripción para permitir valores como "Tornillo2"
 
         if (request.getCategoria() != null && request.getCategoria().matches(".*\\d.*")) {
             errores.put("categoria", "La categoría solo debe contener letras, no números");
@@ -80,17 +66,26 @@ public class AccesorioMapper {
             errores.put("marca", "La marca solo debe contener letras, no números");
         }
 
-        if (request.getPrecio() != null && request.getPrecio().matches("^-?\\d+(\\.\\d+)?$")) {
-            double precio = Double.parseDouble(request.getPrecio());
-            if (precio <= 0) errores.put("precio", "El precio debe ser mayor a 0");
-            else if (precio > 999.99) errores.put("precio", "El precio no puede exceder 999.99");
+        // 🎯 VALIDACIÓN DE PRECIO (Corregida para tipos Double nativos)
+        if (request.getPrecio() != null) {
+            double precio = request.getPrecio();
+            if (precio <= 0) {
+                errores.put("precio", "El precio debe ser mayor a 0");
+            } else if (precio > 999.99) {
+                errores.put("precio", "El precio no puede exceder 999.99");
+            }
         }
 
-        if (request.getStock() != null && request.getStock().matches("^-?\\d+$")) {
-            int stock = Integer.parseInt(request.getStock());
-            if (stock < 1) errores.put("stock", "El stock debe ser mayor a 0");
-            else if (stock > 1000) errores.put("stock", "El stock no puede exceder 1000 unidades");
+        // 🎯 VALIDACIÓN DE STOCK (Corregida para tipos Integer nativos)
+        if (request.getStock() != null) {
+            int stock = request.getStock();
+            if (stock < 1) {
+                errores.put("stock", "El stock debe ser mayor a 0");
+            } else if (stock > 1000) {
+                errores.put("stock", "El stock no puede exceder 1000 unidades");
+            }
         }
+
         return errores;
     }
 }

@@ -13,6 +13,7 @@ import pe.edu.upeu.msaccesorios.service.AccesorioService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/accesorios")
 public class AccesorioController {
@@ -65,6 +66,9 @@ public class AccesorioController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(java.util.Map.of("error", e.getMessage()));
+        } catch (Exception e) { // 🎯 ¡ESTE CATCH SOLUCIONA EL ERROR DE COMPILACIÓN!
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(java.util.Map.of("error", "Error al procesar la solicitud: " + e.getMessage()));
         }
     }
 

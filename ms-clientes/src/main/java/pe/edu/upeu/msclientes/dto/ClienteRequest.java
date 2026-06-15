@@ -1,5 +1,6 @@
 package pe.edu.upeu.msclientes.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 
 public class ClienteRequest {
@@ -11,6 +12,10 @@ public class ClienteRequest {
     @NotBlank(message = "El apellido es obligatorio")
     @Size(max = 100, message = "El apellido no debe exceder 100 caracteres")
     private String apellido;
+
+    @NotBlank(message = "El dni es obligatorio")
+    @Size(max = 8, message = "El dni no debe exceder 8 caracteres")
+    private String dni;
 
     @NotBlank(message = "El correo es obligatorio")
     @Email(message = "El correo no es válido")
@@ -25,9 +30,10 @@ public class ClienteRequest {
     public ClienteRequest() {
     }
 
-    public ClienteRequest(String nombre, String apellido, String correo, String telefono, String direccion) {
+    public ClienteRequest(String nombre, String apellido,String dni, String correo, String telefono, String direccion) {
         this.nombre = nombre;
         this.apellido = apellido;
+        this.dni=dni;
         this.correo = correo;
         this.telefono = telefono;
         this.direccion = direccion;
@@ -47,6 +53,14 @@ public class ClienteRequest {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getCorreo() {

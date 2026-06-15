@@ -13,5 +13,6 @@ public interface IClienteService {
     void eliminar(Long id);
     List<ClienteResponse> buscarPorNombre(String nombre);
     List<ClienteResponse> buscarPorApellido(String apellido);
+    ClienteResponse buscarPorDni(String dni);
 
 }

@@ -12,11 +12,11 @@ public class AccesorioRequest {
     @Size(min = 5, max = 255, message = "La descripción debe tener entre 5 y 255 caracteres")
     private String descripcion;
 
-    @NotBlank(message = "El precio es obligatorio — debe ser un número decimal")
-    private String precio;
+    @NotNull(message = "El precio es obligatorio — debe ser un número decimal")
+    private Double precio;
 
-    @NotBlank(message = "El stock es obligatorio — debe ser un número entero")
-    private String stock;
+    @NotNull(message = "El stock es obligatorio — debe ser un número entero")
+    private Integer stock;
 
     @NotBlank(message = "La categoría es obligatoria")
     @Size(min = 2, max = 50, message = "La categoría debe tener entre 2 y 50 caracteres")
@@ -45,21 +45,11 @@ public class AccesorioRequest {
         this.descripcion = descripcion;
     }
 
-    public String getPrecio() {
-        return precio;
-    }
+    public Double getPrecio() { return precio; }
+    public void setPrecio(Double precio) { this.precio = precio; }
 
-    public void setPrecio(String precio) {
-        this.precio = precio;
-    }
-
-    public String getStock() {
-        return stock;
-    }
-
-    public void setStock(String stock) {
-        this.stock = stock;
-    }
+    public Integer getStock() { return stock; }
+    public void setStock(Integer stock) { this.stock = stock; }
 
     public String getCategoria() {
         return categoria;
@@ -79,17 +69,17 @@ public class AccesorioRequest {
 
     public Double getPrecioAsDouble() {
         if (precio == null) return null;
-        double valor = Double.parseDouble(precio);
-        if (valor <= 0) throw new IllegalArgumentException("El precio debe ser mayor a 0");
-        if (valor > 999.99) throw new IllegalArgumentException("El precio no puede exceder 999.99");
-        return valor;
+        // Ya no necesitas hacer Double.parseDouble() porque ya es un Double
+        if (precio <= 0) throw new IllegalArgumentException("El precio debe ser mayor a 0");
+        if (precio > 999.99) throw new IllegalArgumentException("El precio no puede exceder 999.99");
+        return precio;
     }
 
     public Integer getStockAsInteger() {
         if (stock == null) return null;
-        int valor = Integer.parseInt(stock);
-        if (valor < 1) throw new IllegalArgumentException("El stock debe ser mayor a 0");
-        if (valor > 1000) throw new IllegalArgumentException("El stock no puede exceder 1000 unidades");
-        return valor;
+        // Ya no necesitas hacer Integer.parseInt() porque ya es un Integer
+        if (stock < 1) throw new IllegalArgumentException("El stock debe ser mayor a 0");
+        if (stock > 1000) throw new IllegalArgumentException("El stock no puede exceder 1000 unidades");
+        return stock;
     }
 }

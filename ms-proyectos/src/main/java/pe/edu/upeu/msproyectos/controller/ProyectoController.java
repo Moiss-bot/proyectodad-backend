@@ -11,6 +11,7 @@ import pe.edu.upeu.msproyectos.services.ProyectoService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/proyectos")
 public class ProyectoController {

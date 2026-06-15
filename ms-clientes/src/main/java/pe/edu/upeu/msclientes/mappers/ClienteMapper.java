@@ -12,6 +12,7 @@ public class ClienteMapper {
         ClienteEntity entity = new ClienteEntity();
         entity.setNombre(request.getNombre());
         entity.setApellido(request.getApellido());
+        entity.setDni(request.getDni());
         entity.setCorreo(request.getCorreo());
         entity.setTelefono(request.getTelefono());
         entity.setDireccion(request.getDireccion());
@@ -23,6 +24,7 @@ public class ClienteMapper {
                 entity.getId(),
                 entity.getNombre(),
                 entity.getApellido(),
+                entity.getDni(),
                 entity.getCorreo(),
                 entity.getTelefono(),
                 entity.getDireccion()
@@ -32,6 +34,7 @@ public class ClienteMapper {
     public void updateEntity(ClienteEntity entity, ClienteRequest request) {
         entity.setNombre(request.getNombre());
         entity.setApellido(request.getApellido());
+        entity.setDni(request.getDni());
         entity.setCorreo(request.getCorreo());
         entity.setTelefono(request.getTelefono());
         entity.setDireccion(request.getDireccion());

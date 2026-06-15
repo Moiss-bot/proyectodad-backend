@@ -10,6 +10,7 @@ import pe.edu.upeu.msclientes.service.ClienteService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/clientes")
 public class ClienteController {

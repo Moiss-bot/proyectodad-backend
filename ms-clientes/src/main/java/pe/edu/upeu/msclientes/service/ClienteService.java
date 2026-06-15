@@ -1,6 +1,5 @@
 package pe.edu.upeu.msclientes.service;
 
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upeu.msclientes.dto.ClienteRequest;
@@ -44,7 +43,6 @@ public class ClienteService implements  IClienteService {
     }
 
     @Override
-    @CircuitBreaker(name = "clientesCB", fallbackMethod = "fallbackMethod")
     public ClienteResponse crear(ClienteRequest request) throws Exception {
         // Validación local (DB)
         repository.findByNombreContainingIgnoreCase(request.getNombre()).ifPresent(c -> {
@@ -52,14 +50,7 @@ public class ClienteService implements  IClienteService {
         });
 
         ClienteEntity entity = mapper.toEntity(request);
-        entity.setEstado("ACTIVO");
         return mapper.toResponse(repository.save(entity));
-    }
-
-    public ClienteResponse fallbackMethod(ClienteRequest request, Exception e) {
-        ClienteEntity entity = mapper.toEntity(request);
-        entity.setEstado("FALLBACK - SERVICIO DE VALIDACIÓN NO DISPONIBLE");
-        return mapper.toResponse(entity);
     }
 
     @Override
@@ -71,11 +62,11 @@ public class ClienteService implements  IClienteService {
     }
 
     @Override
-    public void eliminar(Long id) {
-        ClienteEntity entity = repository.findById(id)
-                .orElseThrow(() -> new ClienteNotFoundException(id));
-        entity.setEstado("INACTIVO");
-        repository.save(entity);
+    public void eliminar(Long id){
+        if (!repository.existsById(id)) {
+            throw new IllegalArgumentException("No se puede eliminar. No existe el cliente con ID: " + id);
+        }
+        repository.deleteById(id);
     }
 
     @Override
@@ -92,6 +83,13 @@ public class ClienteService implements  IClienteService {
                 .stream()
                 .map(mapper::toResponse)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ClienteResponse buscarPorDni(String dni) {
+        return repository.findByDni(dni)
+                .map(mapper::toResponse)
+                .orElseThrow(() -> new ClienteNotFoundException("No se encontró el cliente con DNI: " + dni));
     }
 
 }

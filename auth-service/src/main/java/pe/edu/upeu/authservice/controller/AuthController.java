@@ -7,6 +7,7 @@ import pe.edu.upeu.authservice.dto.AuthRequest;
 import pe.edu.upeu.authservice.dto.AuthResponse;
 import pe.edu.upeu.authservice.service.AuthService;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor

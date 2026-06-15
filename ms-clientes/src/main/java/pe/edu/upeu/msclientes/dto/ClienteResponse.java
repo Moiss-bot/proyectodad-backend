@@ -5,6 +5,7 @@ public class ClienteResponse {
     private Long id;
     private String nombre;
     private String apellido;
+    private String dni;
     private String correo;
     private String telefono;
     private String direccion;
@@ -12,10 +13,11 @@ public class ClienteResponse {
     public ClienteResponse() {
     }
 
-    public ClienteResponse(Long id, String nombre, String apellido, String correo, String telefono, String direccion) {
+    public ClienteResponse(Long id, String nombre, String apellido,String dni, String correo, String telefono, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.dni=dni;
         this.correo = correo;
         this.telefono = telefono;
         this.direccion = direccion;
@@ -43,6 +45,14 @@ public class ClienteResponse {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getCorreo() {
