@@ -19,4 +19,13 @@ public class Usuario {
 
     @Column(nullable = false)
     private String rol;
+
+    @Column(length = 100)
+    private String nombres;
+
+    @Column(length = 100)
+    private String apellidos;
+
+    @Column(length = 8, unique = true)
+    private String dni;
 }

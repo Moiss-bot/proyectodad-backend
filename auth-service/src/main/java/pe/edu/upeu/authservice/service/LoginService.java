@@ -2,8 +2,8 @@ package pe.edu.upeu.authservice.service;
 
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class LoginService {
@@ -11,8 +11,8 @@ public class LoginService {
     private static final int MAX_INTENTOS = 3;
     private static final int MINUTOS_BLOQUEO = 5;
 
-    private final Map<String, Integer> intentos = new HashMap<>();
-    private final Map<String, LocalDateTime> bloqueados = new HashMap<>();
+    private final Map<String, Integer> intentos = new ConcurrentHashMap<>();
+    private final Map<String, LocalDateTime> bloqueados = new ConcurrentHashMap<>();
 
     public boolean estaBloqueado(String username) {
         if (bloqueados.containsKey(username)) {

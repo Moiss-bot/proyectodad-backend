@@ -21,7 +21,7 @@ spring:
       indent-output: true
 
 server:
-  port: 8091
+  port: 8092
 
 eureka:
   client:

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upeu.authservice.dto.AuthRequest;
 import pe.edu.upeu.authservice.dto.AuthResponse;
 import pe.edu.upeu.authservice.service.AuthService;
+import pe.edu.upeu.authservice.dto.UsuarioResponse;
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -42,5 +44,10 @@ public class AuthController {
     public ResponseEntity<AuthResponse> loginUser(@RequestBody AuthRequest request) {
         AuthResponse response = authService.loginConRol(request, "USER");
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/usuarios")
+    public ResponseEntity<List<UsuarioResponse>> listarUsuarios() {
+        return ResponseEntity.ok(authService.listarUsuarios());
     }
 }
